@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Shop Homepage - Start Bootstrap Template</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<!-- Bootstrap icons-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+	<!-- Navigation-->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container px-4 px-lg-5">
+			<a class="navbar-brand" href="#!">Start Bootstrap</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="#!">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="#!">All Products</a></li>
+							<li><hr class="dropdown-divider" /></li>
+							<li><a class="dropdown-item" href="#!">Popular Items</a></li>
+							<li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+							<li><a class="dropdown-item" href="#!">New arrivals
+									parkjongodf</a></li>
+						</ul></li>
+				</ul>
+				<form class="d-flex">
+					<button class="btn btn-outline-dark" type="submit">
+						<i class="bi-cart-fill me-1"></i> Cart <span
+							class="badge bg-dark text-white ms-1 rounded-pill">3</span>
+					</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+	<!-- Header-->
+	<header class="bg-dark py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="text-center text-white">
+				<h1 class="display-4 fw-bolder">Shop in style</h1>
+				<p class="lead fw-normal text-white-50 mb-0">With this shop
+					hompeage template</p>
+			</div>
+		</div>
+	</header>
+
+	<!-- Section-->
+	<section class="py-5">
+		<div class="container px-4 px-lg-5 mt-5">
+			<div
+				class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+				<div class="col mb-5">
+					<div class="card h-100">
+						<!-- Sale badge-->
+						<div class="badge bg-dark text-white position-absolute"
+							style="top: 0.5rem; right: 0.5rem">Sale</div>
+						<!-- Product image-->
+						<img class="card-img-top" src="../images/과테말라 안티구아.jpg" alt="..." />
+						<!-- Product details-->
+						<div class="card-body p-4">
+							<div class="text-center">
+								<!-- Product name-->
+								<h5 class="fw-bolder">괴테말라 안티구아 커피</h5>
+								<!-- Product reviews-->
+								<div
+									class="d-flex justify-content-center small text-warning mb-2">
+
+									<div class="bi-star-fill"></div>
+									<div class="bi-star-fill"></div>
+									<div class="bi-star-fill"></div>
+									<div class="bi-star-fill"></div>
+									<div class="bi-star-half"></div>
+								</div>
+								<!-- Product price-->
+								<span class="text-muted text-decoration-line-through">$20.00</span>
+								$18.00
+							</div>
+						</div>
+						<!-- Product actions-->
+						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+							<div class="text-center">
+								<a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 상품 이미지, 상품이름, 평점, 원가격, 할인 가격 -->
+				<script>
+         function getCurrency(number) {
+                return new Intl.NumberFormat('ko-KR', {
+                 style: 'currency',
+                   currency: 'KRW'
+               }).format(number);
+         }
+
+
+   function makeProdutDiv(prod){   //상품 하나를 받아서 db가 넘어 오게 만들어 준다. 
+      let outDiv = document.createElement('div');
+      outDiv.className = "col mb-5";
+   
+      let innerDiv = document.createElement('div');
+      innerDiv.className = "card h-100";
+   
+      outDiv.appendChild(innerDiv);   //부모-자식
+   
+      //하위 요소들을 innerDiv 에 달아주는...
+        //(1)
+        let divBadge = document.createElement('div');
+        divBadge.className = "badge bg-dark text-white position-absolute";
+        divBadge.style.top = "0.5rem";
+        divBadge.style.right = "0.5rem";
+        divBadge.innerHTML = "badge";
+        //(2)
+        let img = document.createElement('img');
+        img.className = "card-img-top";
+        img.setAttribute('src', '../images/' +prod.prodImage);
+        //(3)
+        let itemDiv = document.createElement('div');
+        itemDiv.className = "card-body p-4 ";
+        
+        let itemInner = document.createElement('div');
+        itemInner.className = "text-center";
+        
+        let h5 = document.createElement('h5');
+        h5.className = "fw-bolder";
+        h5.innerHTML = prod.prodName;
+        let likeIt = document.createElement('div');
+        likeIt.className = "d-flex justify-content-center small text-warning mb-2";
+
+        let span = document.createElement('span');
+        span.className = "text-muted text-decoration-line-through";
+        span.innerHTML = getCurrency(prod.originPrice);
+
+        let text = document.createTextNode(getCurrency(prod.offPrice));
+        
+        
+        //star
+        let styleDiv = document.createElement('div');
+        styleDiv.className = "d-flex justify-content-center small text-warning mb-2";
+        
+        let starrDiv = document.createElement('div');
+        starrDiv.className =  "bi-star-fill";
+     
+        
+        
+        itemInner.appendChild(h5);
+        itemInner.appendChild(span);
+        itemInner.appendChild(text);
+        itemDiv.appendChild(itemInner);
+        
+  
+        //(4)
+        let cartDiv = document.createElement('div');
+        cartDiv.className = "card-footer p-4 pt-0 border-top-0 bg-transparent";
+        cartDiv.innerHTML = '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>';
+
+        
+        innerDiv.appendChild(divBadge);
+        innerDiv.appendChild(img);
+        innerDiv.appendChild(itemDiv);
+        innerDiv.appendChild(cartDiv);
+        
+        
+      return outDiv;
+}
+
+
+   let xhtp = new XMLHttpRequest();
+   xhtp.open('get', '../GetCoffeeList');
+   xhtp.send();
+   xhtp.onload = function() {      //서버로 부터 데이터를 가져 올 때 실행
+      let data = JSON.parse(xhtp.responseText);
+      console.log(data);
+      
+          for(let datum of data){
+         let list = document.querySelector('section>div>div');
+         list.appendChild(makeProdutDiv(datum)); 
+      }
+       //form>button>span : innerHTML
+       let cart = document.querySelector('form>button>span');
+       let cnt = cart.innerHTML;
+       console.log(cnt);
+
+   }
+</script>
+
+				<!--  <div class="col mb-5">
+                        <div class="card h-100">
+                            Sale badge
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            Product image
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            Product details
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    Product name
+                                    <h5 class="fw-bolder">Special Item</h5>
+                                    Product reviews
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    Product price
+                                    <span class="text-muted text-decoration-line-through">$20.00</span>
+                                    $18.00
+                                </div>
+                            </div>
+                            Product actions
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div> -->
+
+
+			</div>
+		</div>
+	</section>
+	<!-- Footer-->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; Your
+				Website 2021</p>
+		</div>
+	</footer>
+	<!-- Bootstrap core JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+</body>
+</html>

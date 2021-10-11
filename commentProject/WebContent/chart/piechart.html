@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+    	  //변수가 function안에 선언되었으면 function안에 아작스 호출하는것 넣어야하고 밖에있으면 아작스호출도 밖에서
+    	  
+		var result = [
+          ['Task', 'Hours per Day']
+        ];
+		
+    	var xhtp = new XMLHttpRequest();
+    	xhtp.onload = function() {
+    		var data = JSON.parse(xhtp.responseText);
+    		for (datum of data) {
+    			result.push(datum);
+    		}
+    		console.log(result);
+    	    var data = google.visualization.arrayToDataTable(result);
+
+            var options = {
+              title: '부서별 사원(수)'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+    	}
+    	xhtp.open('get', '../DeptByEmpServ');
+    	xhtp.send();
+    	
+    
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
