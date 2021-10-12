@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>"></script>
+    <script>
+        const apple = {
+            name:'apple',
+            price: 1000
+        }
+        const banana = {
+            name: 'banana',
+            price: 2000
+        }
+        const cherry = {
+            name: 'cherry',
+            price: 3000
+        }
+        const fruits = [apple, banana, cherry];
+
+        //document가 준비가되면 function을 실행하세요
+        $(document).ready(function() {
+            //map은 값을 반환해서 새로운 배열을 만들겠습니다.
+            //map : true/false 상관없이 값을 반환.
+            let newFruits = $.map(fruits, function (obj, idx) {
+                let newFruit = {}
+                newFruit.fruitName = obj.name;
+                newFruit.fruitPrice = obj.price;
+                newFruit.fruitOrder = idx;
+
+                return newFruit; // 리턴 
+            })
+            //grep : true 값만 반환
+            let otherFruits = $.grep(newFruits, function(obj, idx){
+                if (idx > 1) {
+                    return true;
+                }
+                // return idx; //0(false), 1(true), 2(true)
+            });
+
+            $(otherFruits).each(function (idx, obj) {
+                console.log(obj);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="show"></div>
+</body>
+</html>

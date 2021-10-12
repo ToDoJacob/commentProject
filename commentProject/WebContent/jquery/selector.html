@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>"></script>
+    <script>
+        
+        // function callFnc(){
+        //     let ul = $('<ul />').append(
+        //         $('<li>apple</li>'),
+        //         $('<li>mango</li>')
+        //     );
+        //     $(ul).css('color',  'red')
+        //         .css('background-color', 'yellow')
+        //         .attr('id', 'fruit')
+        //         .attr('class', 'first')
+        //     ;
+        //     $('#show').append(ul);
+        // }
+
+        $(document).ready(yourFnc);
+
+        function yourFnc() {
+            let table = $('<table />').attr({'id':'tbl','border':'1'});
+            let thead = $('<thead>').append(
+                $('<tr>').append(
+                    $('<th>이름</th><th>기능</th>'))
+            )
+            let tr1 = $('<tr />')
+            .append($('<td>홍길동</td>'),$('<td><button>삭제</button></td>'));
+
+            let tr2 = $('<tr />')
+            .append($('<td>김민주</td><td>><button>삭제</button></td>'));
+            let tbody = $('<tbody>').append(tr1, tr2);
+            }
+            //$('<tbody>').append($('<tr>').append($('<td>홍길동</td><td>20</td>')));
+            
+            
+            $(table).append(thead);
+            $(table).append(tbody);
+
+            $('#show').append(table);
+
+            //요소를 찾아와서
+            $('thead>tr:nth-child(1)').css('background-color','yellow');
+
+            $('tbody>tr:eq(0)').children().eq(1).html(30);
+            $('tr').eq(2).children().eq(0).attr('id','second');
+            console.log($('#second').parent().prev().children().first().attr('id', 'first'));
+            $('#first').next().css('color', 'red');
+        
+        //이벤트 추가..
+        $('button').on('click', function() {
+            console.log($(this));
+            $(this).parent().parent().remove();
+            //parents하면 상위태그 모두 가져온다.
+        })    
+
+        
+    </script>
+</head>
+<body>
+    <div id="show">
+        <!-- <table id="tbl" border="1">
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>홍길동</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>김민주</td>
+                    <td>21</td>
+                </tr>
+            </tbody>
+        </table> -->
+    </div>
+ 
+</body>
+</html>

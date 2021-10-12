@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div>
+            <h1>인접관계</h1>
+            <p>내용1</p>
+            <p class="txt">내용2</p>
+            <p>내용3</p>
+            <p id="last">내용4</p>
+        </div>
+        <div>
+            <p>내용1</p>
+            <p>내용2</p>
+        </div>
+    </div>
+    <script>
+        // $('div>p:nth-child(1)') //태그종류 상관없이 하위태그중 첫번째
+        $('div>p:nth-of-type(1)').html('para1');   //P태그 종류중에서 첫번째
+
+        $('.txt').prevUntil().css({
+            'background-collor': '#0ff', 
+            'border' : '2px solid #f00'
+            });
+        
+        let style2 = {
+            'background-collor': '#ff0', 
+            'border' : '2px solid #f00'
+        };
+        
+        $('.txt').nextUntil('#last').css(style2);
+
+        // $('.txt').siblings().css('color', 'red');
+
+        $('.txt').closest('div').css('color', 'blue');
+
+        
+    </script>
+</body>
+</html>

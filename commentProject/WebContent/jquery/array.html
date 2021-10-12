@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>"></script>
+</head>
+
+<body>
+    <div id="show"></div>
+
+    <script>
+        function Member(id, name, phone) {
+            this.id = id;
+            this.name = name;
+            this.phone = phone;
+        }
+        const members = [new Member('user1', '홍길동', '1234')];
+        members.push(new Member('user2', '김민주', '4567'));
+        members.push(new Member('user3', '설민석', '3456'));
+
+        let table = document.createElement('table'); //테이블생성
+        table.setAttribute('border', '1'); //속성추가
+        let tbody = document.createElement('tbody'); //티바디생성
+        table.appendChild(tbody); //table>tbody 상속
+        document.getElementById('show').appendChild(table); //div>table
+
+        members.forEach(function (obj, ind) {
+            let tr = document.createElement('tr');
+            for (let field in obj) {
+                let td = document.createElement('td');
+                td.innerHTML = obj[field];
+                tr.appendChild(td);
+            }
+            tbody.appendChild(tr);
+        });
+        jquery : (1)
+        $('tr').each(function (ind, obj) {
+            console.log($(obj));
+            $(obj).click(function () {
+                window.alert($(this).children().eq(1).text());
+            });
+            $(this).mouseover(function () { //fnc안에서$(this) = tr태그
+                $(this).css('background-color', 'yellow');
+            });
+            $(this).on('mouseout', function () {
+                $(this).css('background-color', '');
+            });
+        });
+
+
+        //jquery : (2) => 라이브 이벤트 등록. 
+        //이벤트이름, 태그이름, 이벤트핸들러 순서
+        //document 있는자리에는 뒤에것보다 상위요소가 들어가면된다.
+        // $(table).on('click', 'tr', function (event) {
+        //     // 이름만 띄워주고 싶을때
+        //     window.alert($(event.target).parent().children().eq(1).html());
+        //     // 해당 td를 띄워주고싶을때
+        //     // window.alert($(event.target).html());
+        // }) 
+
+        $(document).on('mouseover', 'tr', function (event) {
+            $(event.target).parent().css('background-color', 'yellow');
+        }) 
+        $(document).on('mouseout', 'tr', function (event) {
+            $(event.target).parent().css('background-color', '');
+        }) 
+
+        // $(members).each();
+        $.each(members, function (idx, obj) {
+            console.log(idx, obj);
+            let $tr = $('<tr />').append(
+                $('<td />').html(obj.id)
+                , $('<td />').html(obj.name)
+                , $('<td />').html(obj.phone)
+            );
+            // $(table).append($tr);
+            tbody.appendChild($tr.get(0)); 
+            // get() : jquery오브젝트타입 -> javascript 오브젝트타입
+            //으로 바꿔준다.
+        })
+    </script>
+</body>
+
+</html>

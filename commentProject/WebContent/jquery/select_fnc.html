@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>"></script>
+    <script>
+        $(function () {
+            // $('button').click(filterFnc);
+            $('button').click(findFnc);
+        });
+
+        function findFnc() {
+            let trVal = $('tbody>tr');
+            $(trVal).find('td:nth-child(1)').css('background-color', 'yellow');
+            $(trVal).find('input:checked').parent().css('background-color', 'blue');
+            //javascript version
+            // trVal = document.querySelectorAll('tbody>tr>td:nth-child(1)');
+            // for (let tr of trVal) {
+            //     tr.style.backgroundColor = 'yellow';
+            // }
+            
+            // $('tbody>tr>td:contains(3.5)').css('color','red');
+            $(trVal).find('td:contains(jpg)').css('color','red');
+
+            console.log($(trVal).find('input:checked').parent().next().contents());
+        }
+
+        function filterFnc() {
+                let checkVal = $('tbody>tr>td>input');
+                 console.log(checkVal);
+
+
+                 $(checkVal).filter(':checked').parent().parent().css('background-color', 'yellow');
+                 $(checkVal).filter(function (idx, ele) {
+                     if (idx % 2 == 0) {
+                         return true;
+                     }
+                 }).parentsUntil('tbody').css('color','red');
+
+                 checkVal = $('tbody>tr>td');
+                 $(checkVal).filter(':has(input)').css('border', '2px solid red');
+            }
+        
+    </script>
+</head>
+<body>
+    <div id="show"></div>
+    <button>클릭</button>
+    <script>
+        fetch('coffee.json')
+            //function(x)값을  받아와서
+            .then(x => x.json())
+            .then(data => createTable(data));
+
+            function createTable(data) {
+                console.log(data);
+                let table = document.createElement('table');
+                table.setAttribute('border','1');
+                let tbody = document.createElement('tbody');
+                table.appendChild(tbody);
+
+                //tbody 안에 tr생성
+                data.forEach( (obj, idx) => {
+                    let tr = document.createElement('tr');
+                    let checkTd = document.createElement('td');
+
+                    checkTd.innerHTML = '<input type="checkbox">';
+                    
+
+                    tr.appendChild(checkTd);
+                    for (let field in obj) {
+                        let td = document.createElement('td');
+                        td.innerHTML = obj[field];
+                        tr.appendChild(td);
+                    }
+                    tbody.appendChild(tr);
+                
+                });
+                document.getElementById('show').appendChild(table);
+            }
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+          color: blue;
+        }
+        p {
+          color: green;
+          margin: 0;
+        }
+        span {
+          color: red;
+        }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+      </head>
+      <body>
+       
+      <div></div>
+      <p></p>
+      <span></span>
+       
+      <div>
+          <p>내용1</p>
+          <p>내용2</p>
+          <p>내용3</p>
+          <p>내용4</p>
+          <p>내용5</p>
+      </div>
+      <script>
+        let idx = $('div>p').index($('p:contains(내용1)'));
+        console.log(idx);
+
+        $("div>p").eq(idx).css('background-color','yellow');
+
+        var arr = [ 1, 9, 3, 8, 6, 1, 5, 9, 4, 7, 3, 8, 6, 9, 1 ];
+        $( "div" ).text( arr.join( ", " ) );
+        
+        //arr에서 5번째 이후 숫자중 5가 아닌 것들을 반환.
+        arr = jQuery.grep(arr, function( n, i ) {
+            return ( n !== 5 && i > 4 );
+        });
+        //숫자 사이사이 , 넣어줌
+        $( "p" ).text( arr.join( ", " ) );
+        
+        arr = jQuery.grep(arr, function( a ) {
+            return a !== 9;
+        });
+
+        $( "span" ).text( arr.join( ", " ) );
+        
+        //arr라는 배열중에서3이라는 숫자의 인덱스번호를 찾아 findVal에 넣겠습니다.
+        //let findVal = $.inArray(3, arr);
+        //배열중 5번째 부터 1이라는 숫자를 찾기 (못찾으면 -1로 반환)
+        let findVal = $.inArray(8, arr, 5);
+        //arr이 배열인지 아닌지 true or false값 반환
+        findVal = $.isArray(arr);
+        //각 인덱스사이에 , 를 넣어 문자열로 반환 
+        findVal = $.isArray(arr.join(','));
+        //두개 배열만 합칠때
+        console.log($.merge([1,2,3], [4,5,6]));
+        //여러개 합칠때
+        console.log([1,2].concat([3,4],[5,6],[7,8]));
+        //index 매개값으로 찾고싶은 숫자 넣으면  해당숫자의 인덱스번호를 반환
+        findVal = $(arr).index(7)
+        console.log(findVal)
+        
+      </script>
+       
+      </body>
+</html>
