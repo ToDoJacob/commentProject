@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	form {
+		border: 1px dotted blue;
+		padding: 2px;
+	}
+
+	.row {
+		margin: 10px 20px;
+	}
+
+	.row>div {
+		display: inline-block;
+		height: 50px;
+		padding: 0 20px;
+		margin: 5px;
+		border: 1px dotted blue;
+	}
+</style>
+<script src="../jquery/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+
+	<form id='frm' method='post' enctype='multipart/form=data' onsubmit='submitAction(event)'>
+		author: <input type='text' name='author'><br>
+		title: <input type='text' name='title'><br>
+		file: <input type='file' name='file'><br>
+		<input type='submit' value='파일업로드'>
+	</form>
+	
+	<div id='show'>
+	<!-- id, author , title, file, image -->
+		<!-- <div class='row'>
+			<div>id</div>
+			<div>author</div>
+			<div>title</div>
+			<div>file</div>
+			<div><img src=""></div>
+		</div>
+		<div class='row'></div>
+		<div class='row'></div> -->
+	</div>
+	<script>
+		//리스트 (이미지 포함)
+		$.ajax({
+			url: '../GetBoardListServlet',
+			type: 'get',
+			dataType: 'json',
+			success: function(result) {
+				//성공시 화면그려주기
+				for (let row of result) {
+					$('#show').append(createDiv(row));
+				}
+			},
+			error: function() {
+				//에러 방생하면 그려주기.
+				console.log(reject);
+			}
+		});
+
+		// 데이터를 한건을 가지고 div> div:id, div:author 이렇게 그려주는것
+		function createDiv(row) {
+			let divRow = $('<div />').addClass('row');
+			$(divRow).append(
+				$('<div />').html(row.num),
+				$('<div />').html(row.author),
+				$('<div />').html(row.title),
+				$('<div />').html(row.fileName),
+				$('<div />').html('<img width="100px" src="../upload/'+row.fileName+'">'),
+			);
+			return divRow;
+		}
+
+
+		function submitAction(ev) {
+			ev.preventDefault();
+			let frm = document.getElementById('frm');
+			let data = new FormData(frm);
+			
+			$.ajax({
+				url: '../AddFileServlet',
+				type: $('#frm').attr('method'),
+				data: data,
+				processData: false, //multipart타입으로 보내려면  false해줘야함
+				contentType: false,
+				dataType: 'json',
+				success: function() {
+					alert('성공');
+					//console.log(result);
+					$('show').append(createDiv(result));
+					
+					//입력했던 값이 입력창에서 지워지도록.
+					$('#frm>input').not('[type="submit"]').val('');
+				},
+				error: function() {
+					alert('실패');
+				}
+			})
+		}
+	</script>
+</body>
+</html>

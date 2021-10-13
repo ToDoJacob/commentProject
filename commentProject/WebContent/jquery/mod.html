@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#show').html('<b>Hello, World</b>'); // 자바스크립트에서는 innerHTML
+            let val = $('#show').html();
+
+            $('#show2').text('<b>Hello, World</b>'); // 자바스크립트에서는 textHTML
+
+            $('#show').attr('class', 'show');
+            // $('#show').removeAttr('data-id');
+            $('#show').addClass('half');
+            $('#show').toggleClass('tog')
+
+            if ($('#show').hasClass('tog')) {
+                $('#show').toggleClass('tog')
+            }
+
+            $('input[name="name"]').val('hongkildong');
+
+           let t_f = $('#climbing').prop('checked');
+            console.log(t_f);
+
+            $('#climbing').prop('checked', false);
+
+            let idx = $('#option').prop('selectedIndex')
+            console.log(idx);
+        })
+    </script>
+</head>
+<body>
+    <div id="show" data-id='first'></div>
+    <div id="show2"></div>
+    <input type="text" name="name" id="name" value="홍길동">
+    <input type="text" name="name2" id="name2" value="hong"><br>
+    취미: <br>
+    <input type="checkbox" name="hobby" id="climbing" value="등산" checked>등산<br>
+    <input type="checkbox" name="hobby" id="cooking" value="요리" checked>요리<br>
+    <input type="checkbox" name="hobby" id="cycling" value="자전거" checked>자전거<br>
+
+    <select id="option">
+        <option value="">option1</option>
+        <option value="">option2</option>
+        <option value="" selected>option3</option>
+    </select>
+
+    <div>Hello</div>
+</body>
+</html>

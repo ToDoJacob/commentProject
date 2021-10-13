@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //.load는 데이터를 가지고와서 document에 그려줌 
+            $('#show').load('hello.txt', function (result){
+                console.log(result);
+            });
+            //.get은 데이터만 가지고 온다.
+            // $.get('coffee.json', function (result) {
+            //     console.log(result);
+            //     let ul = $('<ul />').append($('<li />').html(result[0].prodId + result[0].prodName));
+            //     $('#display').append(ul);
+            // })
+
+            //looping돌면서 모든데이터 가지고와서 화면에 그려줌
+            $.get('coffee.json', function (result) {
+                console.log(result);
+
+                let ul = $('<ul />');
+                for (let row of result) {
+                    $(ul).append($('<li />').html(row.prodId + ' ' + row.prodName));
+                }
+               $('#display').append(ul);
+            })
+        });
+    </script>
+</head>
+<body>
+    <div id="show"></div>
+    <div id="display"></div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #show {
+            border: 3px dotted red;
+            padding: 5px;
+        }
+    </style>
+    <script src="./jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="show"></div>
+    <script>
+        // before, after
+        $('#show').after($('<p>Hello,World</p>'));
+        $('<p>insertBefore</p>').insertBefore($('#show'));
+
+        // append, prepend
+        $('#show').append($('<p>inner</p>'));
+        $('#show').append($('<p>inner2</p>'));
+        //prepend 는 하위요소중에 첫번째자리에 붙임
+        $('#show').prepend($('<p>inner_prepend</p>'));
+        //다무시하고 제일 첫번째에 붙임
+        $('<p>prependTO</p>').prependTo($('#show'));
+        //다무시하고 제일 마지막에 붙임
+        $('<p>appendTO</p>').appendTo($('#show'));
+
+        //#show를 복사해서 변수에 담음
+        let cloned = $('#show').clone();
+        console.log(cloned);
+        //#show 다음순서의 p태그의 뒤에 cloned를 붙임
+        $('#show+p').after(cloned);
+
+        //remove:요소삭제 (해당요소전체삭제), empty:하위요소삭제 (안을비운다)
+        // $(cloned).empty();
+        // $(cloned).remove();
+        
+        //가지고온요소중에서p태그 안에 Textnode가 prependTO인 요소를 찾아와서
+        //div prependTO로 대체해준다. 
+        //replaceWith, replaceAll
+        $(cloned).find('p:contains(prependTO)').replaceWith('<div>prependTO</div>');
+        $('<div>replaceAll</div>').replaceAll($(cloned).find('p:contains(inner2)'));
+
+        //cloned중에서 p요소를 찾아서 div태그로 감싸겠습니다.
+        $(cloned).find('p').wrap('<div />');
+        //cloned중에서 p요소를 찾아서 div로 감싸져있는 요소로 감싸겠습니다.
+        // $(cloned).find('p').wrap('div');
+
+        //unwrap 감싸고있는 부모요소삭제, wrap 각각, wrapAll 한꺼번에 , wrapInner
+        $(cloned).find('p').wrapAll('<div />');
+
+    </script>
+</body>
+</html>

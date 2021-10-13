@@ -9,7 +9,12 @@
     <script>
         $(function () {
             // $('button').click(filterFnc);
-            $('button').click(findFnc);
+            //요소찾기
+            $('button').eq(0).click(findFnc);
+            //체크라인 삭제
+            $('button').eq(1).click(function() {
+            $('tbody>tr>td>input').filter(':checked').parentsUntil('tbody').remove();
+            })
         });
 
         function findFnc() {
@@ -49,6 +54,7 @@
 <body>
     <div id="show"></div>
     <button>클릭</button>
+    <button>삭제</button>
     <script>
         fetch('coffee.json')
             //function(x)값을  받아와서

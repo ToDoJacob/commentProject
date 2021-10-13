@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'coffee.json', //요청페이지
+                type: 'get', //요청방식 get/post (생략하면 get방식)
+                data: 'id=user', //서버로 전송할 데이터 'id=user&pass=1234' (넘겨줄값없으면 생략)
+                dataType: 'json', //요청하는 페이지가 어떤타입json, xml, text, html인지 (자동파싱해준다.)
+                success: showData,
+                error: function (reject) {  //요청 페이지가 없는 이름이거나 에러가 발생하면 실행
+                    console.error('에러발생: ' + reject.statusText);
+                }
+            });
+        });
+        
+        function showData(data) {
+            let table, tbody, tr, td;
+            let thead = '<thead><tr><th>ID</th><th>Name</th><th>Image</th><th>OffPrice</th><th>OriginPrice</th></tr></thead>'
+            table = $('<table id="tbl" />').attr('border', '1');
+            tbody = $('<tbody />');
+            $(table).append(thead); // head영역
+            $(table).append(tbody); // data영역
+
+            for(let row of data) {
+                tr = $('<tr />').append(
+                    $('<td />').html(row.prodId),
+                    $('<td />').html(row.prodName),
+                    $('<td />').html(row.prodImage),
+                    $('<td />').html(row.offPrice),
+                    $('<td />').html(row.originPrice),
+                );
+                $(tbody).append(tr);
+            }
+            $('#show').append(table);
+        }
+    </script>
+</head>
+<body>
+    <form action="a.html" style="border: 1px dotted red; padding: 3px;" onsubmit="submitFrm(event)">
+        ID: <input type="number" name="userId" id="userId">
+        Name: <input type="text" name="Name" id="Name">
+        Image: <input type="text" name="Image" id="Image"><br>
+        OffPrice: <input type="number" name="OffPrice" id="OffPrice">
+        OriginPrice: <input type="number" name="OriginPrice" id="OriginPrice">
+        <br>
+        <input type="submit" value="Save">
+        <input type="reset" value="Reset">
+    </form>
+    <hr>
+    <div id="show"></div>
+
+    <script>
+        function submitFrm(e) {
+            e.preventDefault(); // save버튼누르면 a.html로 이동하는 기능을 막는다.
+            let id = $('#userId').val();
+            let name = $('#Name').val();
+            let image = $('#Image').val();
+            let offPrice = $('#OffPrice').val();
+            let originPrice = $('#OriginPrice').val();
+
+            //ajax 호출
+            $.ajax({
+                url: '입력서블릿',
+                type: 'post', //입력은 주로  post방식으로
+                data: {
+                    prodId: id,
+                    prodName: name,
+                    prodImage: image,
+                    offPrice: offPrice,
+                    originPrice: originPrice
+                },
+                dataType: 'json',
+                success: function (result) {
+
+                },
+                error: function (reject) {
+                    let tr = $('<tr />').append(
+                $('<td />').html(id),
+                $('<td />').html(name),
+                $('<td />').html(image),
+                $('<td />').html(offPrice),
+                $('<td />').html(originPrice),
+            );
+            $('#tbl>tbody').append(tr);
+                }
+            });
+            // let tr = $('<tr />').append(
+            //     $('<td />').html(id),
+            //     $('<td />').html(name),
+            //     $('<td />').html(image),
+            //     $('<td />').html(offPrice),
+            //     $('<td />').html(originPrice),
+            // );
+            // $('#tbl>tbody').append(tr);
+
+        }
+    </script>
+    
+</body>
+</html>

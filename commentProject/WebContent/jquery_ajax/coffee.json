@@ -1,0 +1,27 @@
+[{
+    "prodId":1,
+    "prodName":"과테말라 안티구아 커피",
+    "prodDescription":"과테말라 안티구아산 천연 커피",
+    "prodImage":"과테말라 안티구아.jpg",
+    "originPrice":5000,
+    "offPrice":4500,
+    "likeIt":4.5
+    },{
+        "prodId":2,
+        "prodName":"니카라구아 더치핸드드립용 분쇄원두",
+        "prodDescription":"니카라구아 더치핸드드립용 분쇄원두 천연 커피",
+        "prodImage":"니카라구아 더치핸드드립용 분쇄원두.jpg",
+        "originPrice":6000,
+        "offPrice":5000,
+        "likeIt":4.0
+        },{
+            "prodId":3,
+            "prodName":"브라질산토스",
+            "prodDescription":"브라질산토스 천연 커피",
+            "prodImage":"브라질산토스.jpg",
+            "originPrice":35000,
+            "offPrice":3000,
+            "likeIt":3.5
+            },{
+                "prodId":4,
+                "prodName":"에티오피아 예가체프","prodDescription":"에티오피아 예가체프산 천연 커피","prodImage":"에티오피아 예가체프.jpg","originPrice":3500,"offPrice":2500,"likeIt":4.0},{"prodId":5,"prodName":"케냐 오크라톡신 커피","prodDescription":"케냐 오크라톡신산 천연 커피","prodImage":"케냐 오크라톡신.jpg","originPrice":8000,"offPrice":5500,"likeIt":3.5},{"prodId":6,"prodName":"코스타리카 따라주 커피","prodDescription":"코스타리카 따라주산 천연 커피","prodImage":"코스타리카 따라주.jpg","originPrice":5500,"offPrice":4500,"likeIt":3.0}]
