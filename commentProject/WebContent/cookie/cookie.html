@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>cookie/cookie.html</title>
+</head>
+<body>
+	<button>Login</button>
+	<button>Logout</button>
+	<button>Check</button>
+
+	<script>
+		//임의로만든 DB에서 가져온 데이터 역할 변수
+		let storedUsers = [ {
+			name : '홍길동',
+			id : 'hong',
+			pw : '1111'
+		}, {
+			name : '김민수',
+			id : 'kim',
+			pw : '2222'
+		}, {
+			name : '김동관',
+			id : 'dong',
+			pw : '3333'
+		} ]
+		//로그인기능
+		function login(id, passwd) { //id와 pw있는지 체크하고 있으면 해당 오브젝트를 리턴 없으면 null을 리턴
+			for (let i = 0; i < storedUsers.length; i++) {
+				if (id === storedUsers[i].id && passwd === storedUsers[i].pw) {
+					return storedUsers[i];
+					break;
+				}
+			}
+			return null;
+		}
+		//로그아웃기능
+		function logout() {
+			document.cookie = 'username=; expires=0; path=/'; //쿠키에 저장된 username과 userid를 리셋하겠습니다. 
+			document.cookie = 'userid=; expires=0; path=/';
+		}
+
+		function setCookie(cname, cval) { //시간이 지나면 서버와 연결
+			const times = 3; //시간변수 선언
+			const d = new Date(); //현재날짜
+			d.setTime(d.getTime() + 1000 * 30) //mili초 단위 1000 = 1초 ,1 * 60 * 60= 1시간
+			document.cookie = cname + '=' + cval + '; expires=' + d.toUTCString
+					+ '; path=/';
+			//username=hongkildong; expires=2021 10 14 12:00:00; path=/
+			//userid=hong; expires=2021 10 14 12:00:00; path=/
+			//필드별로 쿠키에 저장가능 
+			//쿠키를 가져올때는 값들이 한번에 지정돼있음
+			//username=honkildong; userid=hong; userinfo=???? (Text형식)
+		}
+		//name을 넣으면 키값을 가지고오는 function
+		function getCookie(cname) {
+			let cookies = document.cookie.split('; ');
+			for (let i = 0; i < cookies.length; i++) {
+				if (cookies[i].indexOf(cname) === 0){ //split으로 각각 자른값중에 cname이 첫번째자리면
+					let result = cookies[i].substring(cname.length + 1); //username=honkildong 에서 username=제외하고 뒷이름값만 자른다
+					return result;
+				}
+			}
+			return null;
+		}
+		
+
+		let btns = document.getElementsByTagName('button');
+
+		//Login버튼
+		btns[0].onclick = function() {
+			let info = login('hong', '1111');
+			if (info) {
+				alert('성공');
+				console.log(info.name);
+				setCookie('username', info.name);
+				setCookie('userid', info.id);
+				//document.cookie = "username=" + info.name; //쿠키에 유저이름정보 보관
+			} else {
+				alert('실패');
+			}
+		}
+		// Logout 버튼
+		btns[1].onclick = function() {
+			logout();
+			alert('logout 완료.');
+		}
+		
+		// Check버튼
+		btns[2].onclick = function() { //버튼중 세번째위치한 버튼을 클릭하면 실행하겠습니다.
+			console.log(getCookie('username'));
+			console.log(getCookie('userid'));
+		}
+	</script>
+</body>
+</html>
