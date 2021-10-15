@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src= "../jquery/jquery-3.6.0.min.js"></script>
+    <style>
+        #city>div {
+            display: inline-block;
+            margin: 2px;
+        }
+        #city>div.active>button {
+            background-color: rgb(156, 156, 156);
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="city"></div>
+    <div id="show"></div>
+
+    <script>
+        let categories = [
+            {code:'서울', city:'서울특별시'},
+            {code:'대전', city:'대전광역시'},
+            {code:'대구', city:'대구광역시'},
+            {code:'울산', city:'울산광역시'},
+            {code:'부산', city:'부산광역시'}
+        ];
+        //화면에 그려주는 부분
+        for (let category of categories) {
+            let div = $('<div />').addClass('city');
+            $(div).html('<button onclick="chooseCity(\''+category.city+'\')">'+ category.code + '</button>' );
+            $('#city').append(div);
+        }
+
+        function chooseCity(cityName) {
+        	//클릭이벤트가 발생할때마다 target이된 button에 현재 선택되었다는 의미에 active class를 넣어주었음
+            $('#city>.city').removeClass('active'); //기존에 active클래스는 다 제거하겠습니다.
+            $(event.target).parent().addClass('active');
+
+            // cityName: 서울특별시 grep:참인값만 리턴
+            let selectedCities = $.grep(cities, function(obj) {
+                return obj.sido === cityName;
+            })
+			// 호출이 다시되면 하위에있는 자식들만 지워줄수있게 empty를 사용
+            $('#show').empty(); 
+
+            let table, tbody, tr, td;
+            table = $('<table />').attr('border','1');
+            $(table).html(
+                '<thead><tr><th>id</th><th>centerName</th><th>sido</th><th>facilityName</th><th>link</th></tr></thead>'
+            );
+
+            // td영역을 그리기. $.each메소드는 매개값 첫번째가 idx, 두번째자리가 obj
+            $.each(selectedCities, function (idx, obj) { //obj 한건한건
+                $(table).append(makeDiv(obj));
+            })
+            $('#show').append(table); //화면에 display.
+        }
+        //데이터 한건을 가지고와서 div안에 td로 그려준다.
+        function makeDiv(row) {
+            let div = $('<tr />').append(
+                $('<td />').html(row.id),
+                $('<td />').html(row.centerName),
+                $('<td />').html(row.sido),
+                $('<td />').html(row.facilityName),
+                //$('<td />').html(row.lat + ',' + row.lng)
+                $('<td />').html('<a href="daum_map.jsp?x='+row.lat+'&y='+row.lng+'&n='+row.facilityName+'" target="_blank">지도</a>')
+            );
+            return div;
+        }
+
+        // api데이터를 cities라는 배열에 저장.
+        let cities= [];
+        $.ajax({
+            url:'open_api.json',
+            dataType: 'json',
+            success: function (result) {
+                // console.log(result);
+                let data = result.data;
+                for (let datum of data) {
+                    cities.push(datum);
+                }
+                // console.log(cities);
+                chooseCity('서울특별시');
+            },
+            error: function (reject) {
+                console.log(reject);
+            }
+        })
+    </script>
+</body>
+</html>
