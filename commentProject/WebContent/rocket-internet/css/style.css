@@ -100,8 +100,9 @@ body
 
 .portfolio img
 {
-    width: 100%;
+    width: 150px;
     cursor: pointer;
+    z-index: ingerit;
 }
 
 .portfolio .last-img
